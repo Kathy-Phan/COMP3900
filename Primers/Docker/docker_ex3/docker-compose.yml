@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  app:
+    build: ./backend
+    ports: 
+      - "9900:9900"
+    environment:
+      - REDIS_HOST=redis
+  frontend:
+    build: ./frontend
+    ports: 
+      - "3901:3000"
+    depends_on:
+      - app
+
